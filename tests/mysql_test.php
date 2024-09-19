@@ -4,14 +4,14 @@ require_once '../core/conexao_mysql.php';
 require_once '../core/sql.php';
 require_once '../core/mysql.php';
 
-insert_teste ('Pedro', 'p.arrieiro@ifsp.edu.br', '123456');
+insert_teste ('giovana', 'giovanah.ps@gmail.com', '789456123');
 buscar_teste();
 update_teste(38, 'murilo', 'silva@gmail.com');
 buscar_teste();
 
 //Teste inserção banco de dados
-function insert_teste($nome, $email, $senha): void{
-
+function insert_teste($nome, $email, $senha): void
+{
     $dados = ['nome' => $nome, 'email' => $email, 'senha' => $senha]; 
     insere ('usuario', $dados);
 }
