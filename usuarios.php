@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title></title>
+        <title>Usuários | Projeto para Web com PHP</title>
         <link rel="stylesheet"
             href="lib/bootstrap-4.2.1-dist/css/bootstrap.min.css">
     </head>
@@ -18,12 +18,12 @@
                     ?>
                 </div>
             </div>
-        
+        </div>
         <div class="row" style="min-height: 500px;">
             <div class="col-md-12">
                 <?php include 'includes/menu.php'; ?>
             </div>
-            <div class="col-md-12" style="padding-top: 50px;">
+            <div class="col-md-10" style="padding-top: 50px;">
                 <?php include 'includes/busca.php'; ?>
                 <?php
                         require_once 'includes/funcoes.php';
@@ -95,7 +95,6 @@
             </div>
         </div>
     </div>
-                            </div>
     <script src="lib/bootstrap-4.2.1-dist/js/bootstrap.min.js"></script>
     </body>
 </html>
