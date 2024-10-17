@@ -1,5 +1,5 @@
 <?php
-
+//---------------------INSERE---------------------
     function insere(string $entidade, array $dados) : bool
     {
         $retorno = false;
@@ -30,7 +30,7 @@
 
         return $retorno;
     }
-
+ //-----------------------------ATUALIZA---------------
     function atualiza(string $entidade, array $dados, array $criterio = []) : bool
     {
         $retorno = false;
@@ -86,7 +86,7 @@
 
         return $retorno;
     }
-
+ //-----------------------------DELETAR---------------
     function deleta(string $entidade, array $criterio = []) : bool
     {
         $retorno = false;
@@ -134,7 +134,7 @@
 
         return $retorno;
     }
-
+   //-------------------------BUSCAR-----------------
     function buscar(string $entidade, array $campos = ['*'], array $criterio = [], string $ordem = null) : array
     {
         $retorno = false;

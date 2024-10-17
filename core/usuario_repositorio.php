@@ -6,28 +6,32 @@ require_once 'sql.php';
 require_once 'mysql.php';
 $salt = '$exemplosaltifsp';
 
-foreach ($_POST as $indice => $dado) {
+foreach ($_POST as $indice => $dado) 
+{
     $$indice = limparDados($dado);
 }
 
-foreach ($_GET as $indice => $dado) { 
+foreach ($_GET as $indice => $dado) 
+{ 
     $$indice = limparDados($dado);
 }
 
-switch ($acao) {
+switch ($acao) 
+{
+    //CADASTRA-INSERE O USUARIO NO BANCO
         case 'insert':
             $dados = [
                 'nome' => $nome,
                 'email' => $email,
+                #criptografa a senha
                 'senha' => crypt($senha, $salt)
             ];
-
-            insere(
-                'usuario',
-                $dados
-            );
-
+            #funcao inserir
+            insere('usuario',$dados);
             break;
+
+
+        //ATUALIZA O PERFIL DO BANCO
         case 'update':
             $id = (int)$id;
             $dados = [
@@ -38,14 +42,12 @@ switch ($acao) {
             $criterio = [
                 ['id', '=', $id]
             ];
-
-            atualiza(
-                'usuario',
-                $dados,
-                $criterio
-            );
-
+            #funcao atualiza
+            atualiza('usuario',$dados,$criterio);
             break;
+
+
+        //LOGIN USUARIO
         case 'login':
             $criterio = [
                 ['email', '=', $email],
@@ -58,21 +60,27 @@ switch ($acao) {
                 $criterio
             );
 
-            if(count($retorno) > 0){
-                if(crypt($senha, $salt)== $retorno[0]['senha']){
+            if(count($retorno) > 0)
+            {
+                if(crypt($senha, $salt)== $retorno[0]['senha'])
+                {
                     $_SESSION['login']['usuario'] = $retorno[0];
-                    if(!empty($_SESSION['url_retorno'])){
+                    if(!empty($_SESSION['url_retorno']))
+                    {
                         header('Location: ' . $_SESSION['url_retorno']);
                         $_SESSION['url_retorno'] = '';
                         exit;
                     }
                 }
             }
-
             break;
+
+        //LOG OUT DO USUARIO   
         case 'logout':
             session_destroy();
             break;
+
+        //STATUS DO USUARIO
         case 'status':
             $id = (int)$id;
             $valor = (int)$valor;
@@ -85,15 +93,14 @@ switch ($acao) {
                 ['id', '=', $id]
             ];
 
-            atualiza(
-                'usuario',
-                $dados,
-                $criterio
-            );
+            #funcao para ATIVAR o usuario
+            atualiza('usuario',$dados,$criterio);
 
             header('Location: ../usuarios.php');
             exit;
             break;
+
+        //ADMINISTRADOR   
         case 'adm':
             $id = (int)$id;
             $valor = (int)$valor;
@@ -106,15 +113,13 @@ switch ($acao) {
                 ['id', '=', $id]
             ];
 
-            atualiza(
-                'usuario',
-                $dados,
-                $criterio
-            );
+            #funcao para dar permissao ADM para o usuario
+            atualiza('usuario',$dados,$criterio);
             
             header('Location: ../usuarios.php');
             exit;
             break;
+            
         }
     header('Location: ../index.php');
 ?>

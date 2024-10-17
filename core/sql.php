@@ -1,4 +1,6 @@
 <?php
+//Documento responsavel por criar as SQL's Statements para enviar comandos ao banco de dados 
+
 /*GERA INSTRUÇÕES SQL AUTOMATICAMENTE*/
 function insert (string $entidade, array $dados) : string 
 {
@@ -12,7 +14,7 @@ function insert (string $entidade, array $dados) : string
 
 return $instrucao;
 }
-/*******************************************************/
+/****************************UPDATE***************************/
 
 function update (string $entidade, array $dados, array $criterio = []) : string
 {
@@ -34,7 +36,7 @@ function update (string $entidade, array $dados, array $criterio = []) : string
 
     return $instrucao;
 }
-/*******************************************************/
+/*******************************DELETA************************/
 
 function delete (string $entidade, array $criterio = []) : string
 {
@@ -50,7 +52,7 @@ function delete (string $entidade, array $criterio = []) : string
 
     return $instrucao;
 }
-/*******************************************************/
+/*********************************SELECT**********************/
 
 function  select (string $entidade, array $campos, array $criterio = [], 
 string $ordem = null) : string

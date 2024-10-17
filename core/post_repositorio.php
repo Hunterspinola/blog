@@ -17,6 +17,7 @@ foreach($_GET as $indice => $dado) {
 $id = (int)$id;
 
 switch($acao) {
+    //INSERE O POST NO BANCO
     case 'insert':
         $dados = [
             'titulo' => $titulo,
@@ -24,13 +25,12 @@ switch($acao) {
             'data_postagem' => "$data_postagem $hora_postagem",
             'usuario_id' => $_SESSION['login'] ['usuario'] ['id']
         ];
-
-        insere(
-            'post',
-            $dados
-        );
-
+        #funcao para inserir
+        insere('post',$dados);
         break;
+
+
+    //ATUALIZA O POST DO BANCO
     case 'update':
         $dados = [
             'titulo' => $titulo,
@@ -43,23 +43,18 @@ switch($acao) {
             ['id', '=', $id]
         ];
 
-        atualiza(
-            'post',
-            $dados,
-            $criterio
-        );
-
+        #funcao atualizar
+        atualiza('post',$dados,$criterio);
         break;
+
+
+    //DELETA O POST DO BANCO 
     case 'delete':
         $criterio = [
             ['id', '=', $id]
         ];
-
-        deleta(
-            'post',
-            $criterio
-        );
-        
+        #funcao deleta
+        deleta('post',$criterio);
         break;
 }
 
