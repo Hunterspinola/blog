@@ -1,5 +1,5 @@
 <?php
-//---------------------INSERE---------------------
+    //INSERE
     function insere(string $entidade, array $dados) : bool
     {
         $retorno = false;
@@ -30,7 +30,8 @@
 
         return $retorno;
     }
- //-----------------------------ATUALIZA---------------
+
+    //ATUALIZA
     function atualiza(string $entidade, array $dados, array $criterio = []) : bool
     {
         $retorno = false;
@@ -86,7 +87,8 @@
 
         return $retorno;
     }
- //-----------------------------DELETAR---------------
+
+    //DELETAR
     function deleta(string $entidade, array $criterio = []) : bool
     {
         $retorno = false;
@@ -134,7 +136,8 @@
 
         return $retorno;
     }
-   //-------------------------BUSCAR-----------------
+    
+   //BUSCAR
     function buscar(string $entidade, array $campos = ['*'], array $criterio = [], string $ordem = null) : array
     {
         $retorno = false;
@@ -159,7 +162,7 @@
         }
 
         $instrucao = select($entidade, $campos, $coringa_criterio, $ordem);
-
+        //echo $instrucao;
         $conexao = conecta();
 
         $stmt = mysqli_prepare($conexao, $instrucao);

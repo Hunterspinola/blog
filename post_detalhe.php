@@ -5,25 +5,19 @@
     require_once 'core/sql.php';
     require_once 'core/mysql.php';
 
-    foreach($_GET as $indice => $dado){
+    foreach($_GET as $indice => $dado)
+    {
         $$indice = limparDados($dado);
     }
-
-    $posts = buscar(
-        'post',
-        [
-            'titulo',
-            'data_postagem',
-            'texto',
-            '(select nome
-                from usuario
-                where usuario.id = post.usuario_id) as nome'
-        ],
+     //Puxa os valores
+    $posts = buscar('post',['titulo','data_postagem','texto','(select nome from usuario
+                where usuario.id = post.usuario_id) as nome'],
         [
             ['id', '=', $post]
         ]
     );
     $post = $posts[0];
+    #Puxa e Formata a data e horario
     $data_post = date_create($post['data_postagem']);
     $data_post = date_format($data_post, 'd/m/Y H:i:s');
 

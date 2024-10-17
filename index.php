@@ -32,6 +32,7 @@
                 ?>
 
                 <?php 
+                   #Pega o horario atual de acordo com o fuso
                     date_default_timezone_set('America/Sao_Paulo');
                     require_once 'includes/funcoes.php';
                     require_once 'core/conexao_mysql.php';
@@ -40,21 +41,32 @@
                     foreach($_GET as $indice => $dado){
                         $$indice = limparDados($dado);
                     }
-                    $data_atual = date('Y-m-d H:i:s');
 
+                    //Pega a data atual
+                    $data_atual = date('Y-m-d H:i:s');
+                    //Primeiro criterio para puxar o post na data correta
                     $criterio = [
                         ['data_postagem', '<=', $data_atual]
                     ];
 
+                    //CRITÉRIO DE BUSCA
                     if(!empty($busca)){
                         $criterio[] = [
                             'AND',
+                            'texto',
+                            'like',
+                            "%{$busca}%"
+                        ];
+
+                        $criterio[] = [
+                            'OR',
                             'titulo',
                             'like',
                             "%{$busca}%"
                         ];
                     }
 
+                    //funcao 'Buscar()'
                     $posts = buscar(
                         'post',
                         [
@@ -71,7 +83,9 @@
                 ?>
                 <div>
                     <div class="list-group">
-                        <?php 
+                        <?php
+                        //MOSTRA OS POSTS DISPONIVEIS
+                        #Puxa a data e horario e os formata  
                             foreach($posts as $post):
                                 $data = date_create($post['data_postagem']);
                                 $data = date_format($data, 'd/m/Y H:i:s');
